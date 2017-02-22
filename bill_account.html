@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans" data-rem="375">
+<head>
+    <meta charset="UTF-8">
+    <meta name="renderer" content="webkit">
+    <meta name="viewport" content="maximum-scale=1.0, initial-scale=1.0, user-scalable=no, minimal-ui">
+    <title>结算帐户</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/cxy-style.css" rel="stylesheet">
+    <link href="css/artDialog.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+</head>
+<body class="reg">
+    <div class="container person">
+        <div class="ban-ner">
+            <p class="pose">安全收款，轻松销售</p>
+            <p class="ptse">随时随地开展业务</p>
+            <p class="prse">简单易用，只要有手机，就可以完成结账</p>   
+        </div>
+        <div class="cont-per1">
+          <h3>结算帐户</h3>
+          <div class="row">
+            <form action="" method="" id="regFrm"  class="form-horizontal">
+                  <div class="form-group">
+                    <div class="col-xs-12">
+                      <textarea name="accountName" class="form-control" id="accountName"  placeholder="*晓东">*晓东</textarea>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <div class="col-xs-12">
+                      <textarea name="accountCard" class="form-control" id="accountCard"  placeholder="6225******2365">6225******2365</textarea>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <div class="col-xs-12">
+                      <select  class="form-control" id="bankCity" name="bankCity">
+                        <option value="">开户行城市</option>
+                        <option value="1">北京</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <div class="col-xs-12">
+                      <select  class="form-control" id="bankName" name="bankName">
+                        <option value="">银行名称</option>
+                        <option value="1">招商银行</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <div class="col-xs-12">
+                      <select  class="form-control" id="subBankName" name="subBankName">
+                        <option value="">支行名称</option>
+                        <option value="1">招商银行万寿路支行</option>
+                      </select>
+                    </div>
+                  </div>
+            </form>
+          </div>
+          <div class="row">
+            <input type="button" class="btn btn-primary btn-task center-block"  id="nextBtn" value="保存" />
+          </div>
+          <div class="modal container fade" id="infoModal" tabindex="-1" role="dialog" 
+             aria-labelledby="myModalLabel" aria-hidden="true">
+             <div class="modal-dialog">
+                <div class="modal-content">
+                   <div class="modal-body">
+                      <p>您确定提交？</p>
+                   </div>
+                   <div class="modal-footer">
+                      <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                      <button type="button" id="confirmBtn"  class="btn  btn-info" data-dismiss="modal">确定</button>
+                   </div>
+                </div>
+              </div>
+          </div>
+        </div>
+        <div class="footer-per">
+            <!-- <img src="./assets/img/foot-bg.png"> -->
+            <p class="footper-down">本活动最终解释权<br>归北京源力科技有限公司所有</p>
+        </div>
+    </div>
+
+</body>
+</html>
+<script src="js/jquery.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/jquery.validate.min.js"></script>
+<script src="js/artDialog.js"></script>
+<script src="js/showLoading.js"></script>
+<script src="js/app.js"></script>
+<script type="text/javascript">
+$(function(){
+  $(".reg #regFrm").validate({
+    debug: true,
+    submitHandler: function(form){
+      form.submit();
+    },
+    rules: {
+      accountName: {
+        required: true
+      },
+      accountCard: {
+        required: true
+      },
+      bankCity: {
+        required: true
+      },
+      bankName: {
+        required: true
+      },
+      subBankName: {
+        required: true
+      }
+    },
+    messages: {  
+      accountName: {
+        required: "请填写收款人姓名"
+      },
+      accountCard: {
+        required: "请填写收款卡号"
+      },
+      bankCity: {
+        required: "请选择开户行城市"
+      },
+      bankName: {
+        required: "请选择银行名称"
+      },
+      subBankName: {
+        required: "请选择支行名称"
+      }
+    }  
+  });
+
+   //点击下一步按钮
+  $(".reg #nextBtn").click(function(){
+    if ($(".reg #regFrm").valid()){ 
+        $('#infoModal').modal();
+    }
+  });
+
+  //点击确定按钮
+  $(".reg #confirmBtn").click(function(){
+        $.ajax({
+          cache: false,
+          type: "POST",
+          url: '',
+          data: $("#regFrm").serialize(),
+          async: false,
+          dataType:'json',
+          success: function(msg){
+              if(msg.status == 200){
+                window.location.href='register_success.html';  
+              }else{
+                  art.dialog('注册失败！', function(){});
+                  return false;
+              }        
+          }
+        });
+  });
+}) 
+</script>
+

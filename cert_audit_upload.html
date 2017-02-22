@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans" data-rem="375">
+<head>
+    <meta charset="UTF-8">
+    <meta name="renderer" content="webkit">
+    <meta name="viewport" content="maximum-scale=1.0, initial-scale=1.0, user-scalable=no, minimal-ui">
+    <title>资质认证</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/cxy-style.css" rel="stylesheet">
+    <link href="css/artDialog.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+</head>
+<body class="reg collection audit">
+    <div class="container person">
+        <div class="ban-ner">
+            <p class="pose">安全收款，轻松销售</p>
+            <p class="ptse">随时随地开展业务</p>
+            <p class="prse">简单易用，只要有手机，就可以完成结账</p>   
+        </div>
+        <div class="cont-per1 list">
+          <h3>资质认证</h3>
+            <form id='imgCollectFrm' action="" method=""   class="form-horizontal">
+              <div class="row">
+                 <div class="col-xs-2"><img src="img/user.png"/></div>
+                 <div class="col-xs-4">
+                   <p><a href="">小微版</a></p>
+                 </div>
+                 <div class="col-xs-6">
+                   
+                 </div>
+              </div>
+              <div class="row">
+                 <div class="col-xs-2"><img src="img/user.png"/></div>
+                 <div class="col-xs-4">
+                   <p><a href="">商户版</a></p>
+                 </div>
+                 <div class="col-xs-6">
+                   <p class="arrow">✓</p>
+                 </div>
+              </div>
+              <div class="upload nopass error">
+                <p>未通过审核原因：</p>
+                <p>1.非本人身份证</p>
+                <p>2.手持证照不符合拍摄标准，重新拍照</p>
+              </div>
+              <div class="upload photo">
+                <div class="tit">
+                    <h5>上传本人照片</h5>
+                    <span class="rt dis"><i class="glyphicon glyphicon-chevron-right"></i></span>
+                    <span class="down"><i class="glyphicon glyphicon-chevron-down"></i></span>
+                 </div>
+                 <div class="inner">
+                   <div class="row">
+                      <div class="col-xs-6"><img src="img/id1.jpg"/></div>
+                      <div class="col-xs-6"><div class="dis box"><b>×</b><img src="" height="88" width="100%"/></div><div class="upload-img">+</div></div>
+                   </div>
+                   <div class="row">
+                      <div class="col-xs-6"><img src="img/id2.jpg"/></div>
+                     <div class="col-xs-6"><div class="dis box"><b>×</b><img src="" height="88" width="100%"/></div><div class="upload-img">+</div></div>
+                   </div>
+                   <div class="row">
+                      <div class="col-xs-6"><img src="img/id3.jpg"/></div>
+                      <div class="col-xs-6"><div class="dis box"><b>×</b><img src="" height="88" width="100%"/></div><div class="upload-img">+</div></div>
+                   </div>
+                </div>
+              </div>
+              <div class="upload buss">
+                 <div class="tit">
+                    <h5>上传营业执照</h5>
+                    <span class="rt"><i class="glyphicon glyphicon-chevron-right"></i></span>
+                    <span class="down dis"><i class="glyphicon glyphicon-chevron-down"></i></span>
+                 </div>
+                 <div class="inner dis">
+                   <div class="row">
+                      <div class="col-xs-6"><img src="img/cert1.jpg" id="certFront" class="upload-img"/></div>
+                      <div class="col-xs-6"><div class="dis box"><b>×</b><img src="" height="88" width="100%"/></div><div class="upload-img">+</div></div>
+                   </div>
+                   <div class="row">
+                      <div class="col-xs-6"><img src="img/cert2.jpg" id="bussPic" class="upload-img"/></div>
+                      <div class="col-xs-6"><div class="dis box"><b>×</b><img src="" height="88" width="100%"/></div><div class="upload-img">+</div></div>
+                   </div>
+                </div>
+              </div>
+            </form>
+            <form action="" method="" id="imgApiFrm"  class="form-horizontal">
+              <input type="file" accept="image/*;capture=camera" name="image" class="dis" id="uploadImgBtn"/>
+            </form>
+            <div>
+                <input type="button" class="btn btn-primary btn-task center-block"  id="nextBtn" value="提交审核" />
+            </div>
+
+            <div class="modal container fade" id="infoModal" tabindex="-1" role="dialog" 
+             aria-labelledby="myModalLabel" aria-hidden="true">
+             <div class="modal-dialog">
+                <div class="modal-content">
+                   <div class="modal-body">
+                      <p>您确定提交？</p>
+                   </div>
+                   <div class="modal-footer">
+                      <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                      <button type="button" id="confirmBtn"  class="btn  btn-info" data-dismiss="modal">确定</button>
+                   </div>
+                </div>
+              </div>
+          </div>
+        </div>
+        <div class="footer-per">
+            <!-- <img src="./assets/img/foot-bg.png"> -->
+            <p class="footper-down">本活动最终解释权<br>归北京源力科技有限公司所有</p>
+        </div>
+    </div>
+
+</body>
+</html>
+
+<script src="js/jquery.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/jquery.validate.min.js"></script>
+<script src="js/artDialog.js"></script>
+<script src="js/showLoading.js"></script>
+<script src="js/app.js"></script>
+<script type="text/javascript">
+$(function(){
+  var imgBtn="";//用于记录点击了哪个上传图片按钮
+  $(".upload-img").click(function(){
+      imgBtn = $(this);
+      $("#uploadImgBtn").click();
+  });
+
+  $("#uploadImgBtn").bind("change",function(){
+
+    var file = $(this).get(0);
+    if(!file.files || !file.files[0]){
+      return;
+    }
+
+    console.log(file.files);
+
+     // $.ajax({
+     //      url: '',
+     //      type: 'POST',
+     //      data: '',
+     //      async: true,
+     //      cache: false,
+     //      contentType: false,
+     //      processData: false,
+     //      success: function (msg) {
+     //        if (msg.code == 200) {
+     //            
+                                
+     //        } else {
+     //           
+     //        }
+     //        $("body").hideLoading();
+     //      },
+     //      error: function (returndata) {
+     //        $("body").hideLoading();
+     //          alert(returndata);
+     //      }
+
+     // });
+       var reader = new FileReader();
+       reader.readAsDataURL(file.files[0]);
+       reader.onload = function(evt){
+          var imgUrl = evt.target.result;
+
+         imgUrl = "data:application/octet-stream;"+evt.target.result.substr(evt.target.result.indexOf("base64,"));
+         imgBtn.prev().removeClass("dis").find("img").attr("src",imgUrl);
+         imgBtn.addClass("dis");
+
+          //绑定删除事件
+         imgBtn.prev().find("b").click(function(){
+            var thisDiv = $(this).parent();
+            thisDiv.addClass("dis");
+            $(this).next().attr("src",'');
+            thisDiv.next().removeClass("dis");
+          })
+        }
+  });
+
+  var getFormData = function() {
+      return $('#imgCollectFrm').serialize();
+  }
+
+  $(".tit .rt").click(function(){
+    $(this).next().removeClass("dis");
+    $(this).parent().next().removeClass("dis");
+    $(this).addClass("dis");
+  });
+
+  $(".tit .down").click(function(){
+    $(this).prev().removeClass("dis");
+    $(this).parent().next().addClass("dis");
+    $(this).addClass("dis");
+  });
+
+
+     //点击下一步按钮
+  $("#nextBtn").click(function(){
+    var flag= true;
+    $(".box img").each(function(){
+      if ($(this).attr("src")==''){
+        flag = false;
+        if ($(this).parentsUntil("upload").hasClass("photo")){
+          art.dialog('请您先上传照片！', function(){});
+          return false;
+        }else{
+          art.dialog('请您先上传营业执照！', function(){});
+          return false;
+        }
+      }
+    });
+    if (flag){
+      $('#infoModal').modal();
+    }
+
+  });
+
+  //点击确定按钮
+  $("#confirmBtn").click(function(){
+        $.ajax({
+          cache: false,
+          type: "POST",
+          url: '',
+          data: '',
+          async: false,
+          dataType:'json',
+          success: function(msg){
+              if(msg.status == 200){
+                window.location.href='register_step4.html';  
+              }else{
+                  art.dialog('失败！', function(){});
+                  return false;
+              }        
+          }
+        });
+  });
+
+})
+</script>
+

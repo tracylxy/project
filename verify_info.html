@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans" data-rem="375">
+<head>
+    <meta charset="UTF-8">
+    <meta name="renderer" content="webkit">
+    <meta name="viewport" content="maximum-scale=1.0, initial-scale=1.0, user-scalable=no, minimal-ui">
+    <title>验证信息</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/cxy-style.css" rel="stylesheet">
+    <link href="css/artDialog.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+</head>
+<body class="reg">
+    <div class="container person">
+        <div class="ban-ner">
+            <p class="pose">安全收款，轻松销售</p>
+            <p class="ptse">随时随地开展业务</p>
+            <p class="prse">简单易用，只要有手机，就可以完成结账</p>   
+        </div>
+        <div class="cont-per1">
+          <h3>验证信息</h3>
+          <div class="row">
+            <form action="" method="" id="regFrm"  class="form-horizontal">
+                  <div class="form-group">
+                    <div class="col-xs-12">
+                      <input type="password" name="password" class="form-control" id="password"  placeholder="请输入登录密码"/>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <div class="col-xs-8">
+                      <textarea name="picCode" class="form-control" id="picCode"  placeholder="请填写图片验证码"></textarea>
+                    </div>
+                    <div class="col-xs-4">
+                      <a href="#" class="btn btn-default" role="button">Artd</a>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <div class="col-xs-8">
+                      <textarea name="smsCode" class="form-control" id="smsCode"  placeholder="请填写短信验证码"></textarea>
+                    </div>
+                    <div class="col-xs-4">
+                      <input type="button" class="btn btn-primary"  name="btn-task" value="获取验证码" />
+                    </div>
+                  </div>
+            </form>
+          </div>
+          <div class="row">
+            <input type="button" class="btn btn-primary btn-task center-block"  id="nextBtn" value="下一步" />
+          </div>
+          <div class="modal container fade" id="infoModal" tabindex="-1" role="dialog" 
+             aria-labelledby="myModalLabel" aria-hidden="true">
+             <div class="modal-dialog">
+                <div class="modal-content">
+                   <div class="modal-body">
+                      <p>您确定提交？</p>
+                   </div>
+                   <div class="modal-footer">
+                      <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                      <button type="button" id="confirmBtn"  class="btn  btn-info" data-dismiss="modal">确定</button>
+                   </div>
+                </div>
+              </div>
+          </div>
+        </div>
+        <div class="footer-per">
+            <!-- <img src="./assets/img/foot-bg.png"> -->
+            <p class="footper-down">本活动最终解释权<br>归北京源力科技有限公司所有</p>
+        </div>
+    </div>
+</body>
+</html>
+<script src="js/jquery.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/jquery.validate.min.js"></script>
+<script src="js/artDialog.js"></script>
+<script src="js/showLoading.js"></script>
+<script src="js/app.js"></script>
+<script type="text/javascript">
+$(function(){
+  $(".reg #regFrm").validate({
+    debug: true,
+    submitHandler: function(form){
+      form.submit();
+    },
+    rules: {
+      password: {
+        required: true
+      },
+      picCode: {
+        required: true
+      },
+      smsCode: {
+        required: true
+      }
+    },
+    messages: {  
+      password: {  
+          required: "请输入登录密码"
+      },
+      picCode: {  
+          required: "请输入图片验证码"
+      },
+      smsCode: {  
+          required: "请输入短信验证码"
+      }
+    }  
+  });
+
+   //点击下一步按钮
+  $(".reg #nextBtn").click(function(){
+    if ($(".reg #regFrm").valid()){ 
+        $('#infoModal').modal();
+    }
+  });
+
+  //点击确定按钮
+  $(".reg #confirmBtn").click(function(){
+        $.ajax({
+          cache: false,
+          type: "POST",
+          url: '',
+          data: $("#regFrm").serialize(),
+          async: false,
+          dataType:'json',
+          success: function(msg){
+              if(msg.status == 200){
+                window.location.href='register_step2.html';  
+              }else{
+                  art.dialog('验证失败！', function(){});
+                  return false;
+              }        
+          }
+        });
+  });
+}) 
+</script>
+

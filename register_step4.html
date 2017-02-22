@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans" data-rem="375">
+<head>
+    <meta charset="UTF-8">
+    <meta name="renderer" content="webkit">
+    <meta name="viewport" content="maximum-scale=1.0, initial-scale=1.0, user-scalable=no, minimal-ui">
+    <title>商户注册-填写商户收款信息</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/cxy-style.css" rel="stylesheet">
+    <link href="css/artDialog.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+</head>
+  <body class="reg">
+        <div class="container person">
+        <div class="ban-ner">
+            <p class="pose">安全收款，轻松销售</p>
+            <p class="ptse">随时随地开展业务</p>
+            <p class="prse">简单易用，只要有手机，就可以完成结账</p>   
+        </div>
+        <div class="cont-per1">
+          <h3>商户注册</h3>
+          <div class="reg-step">
+              <ul>
+                <li><h4>4.填写商户收款信息</h4><p>请如实填写，否则可能会不到帐哦</p><b class="up"><i class="glyphicon glyphicon-chevron-right"></i></b></li>
+              </ul>
+          </div>
+          <div class="row">
+            <form action="" method="" id="regFrm"  class="form-horizontal">
+
+                  <div class="form-group">
+                    <div class="col-xs-12">
+                      <select  class="form-control" id="accountType" name="accountType">
+                        <option value="">帐户类型</option>
+                        <option value="1">对公企业结算</option>
+                        <option value="2">对私本人结算</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="for-public dis">
+                      <div class="form-group">
+                        <div class="col-xs-12">
+                          <textarea name="bussNum" class="form-control" id="bussNum"  placeholder="营业执照编号"></textarea>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <div class="col-xs-12">
+                          <textarea name="bussName" class="form-control" id="bussName"  placeholder="营业执照注册名称"></textarea>
+                        </div>
+                      </div>
+                  </div>
+                  <div class="for-private dis">
+                      <div class="form-group">
+                        <div class="col-xs-12">
+                          <textarea name="accountName" class="form-control" id="accountName"  placeholder="姓名"></textarea>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <div class="col-xs-12">
+                          <textarea name="idNum" class="form-control" id="idNum"  placeholder="身份证号"></textarea>
+                        </div>
+                      </div>
+                  </div>
+                  <div class="form-group">
+                    <div class="col-xs-12">
+                      <textarea name="accountCard" class="form-control" id="accountCard"  placeholder="收款卡号"></textarea>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <div class="col-xs-12">
+                      <select  class="form-control" id="bankCity" name="bankCity">
+                        <option value="">开户行城市</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <div class="col-xs-12">
+                      <select  class="form-control" id="bankName" name="bankName">
+                        <option value="">银行名称</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <div class="col-xs-12">
+                      <select  class="form-control" id="subBankName" name="subBankName">
+                        <option value="">支行名称</option>
+                      </select>
+                    </div>
+                  </div>
+            </form>
+          </div>
+          <div class="row">
+            <input type="button" class="btn btn-primary btn-task center-block"  id="nextBtn" value="下一步" />
+          </div>
+          <div class="modal container fade" id="infoModal" tabindex="-1" role="dialog" 
+             aria-labelledby="myModalLabel" aria-hidden="true">
+             <div class="modal-dialog">
+                <div class="modal-content">
+                   <div class="modal-body">
+                      <p>您确定提交？</p>
+                   </div>
+                   <div class="modal-footer">
+                      <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                      <button type="button" id="confirmBtn"  class="btn  btn-info" data-dismiss="modal">确定</button>
+                   </div>
+                </div>
+              </div>
+          </div>
+        </div>
+        <div class="footer-per">
+            <!-- <img src="./assets/img/foot-bg.png"> -->
+            <p class="footper-down">本活动最终解释权<br>归北京源力科技有限公司所有</p>
+        </div>
+    </div>
+  </body>
+</html>
+<script src="js/jquery.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/jquery.validate.min.js"></script>
+<script src="js/artDialog.js"></script>
+<script src="js/showLoading.js"></script>
+<script src="js/app.js"></script>
+<script type="text/javascript">
+$(function(){
+  $(".reg #regFrm").validate({
+    debug: true,
+    submitHandler: function(form){
+      form.submit();
+    },
+    rules: {
+      bussNum:{
+        required: true
+      },
+      bussName:{
+        required: true
+      },
+      accountName: {
+        required: true
+      },
+      idNum: {
+        required: true,
+        isIdNum: true
+      },
+      accountCard: {
+        required: true
+      },
+      bankCity: {
+        required: true
+      },
+      bankName: {
+        required: true
+      },
+      subBankName: {
+        required: true
+      }
+    },
+    messages: { 
+      bussNum:{
+        required: "请填写营业执照编号"
+      }, 
+      bussName:{
+        required: "请填写营业执照注册名称"
+      },
+      accountName:{
+        required: "请填写收款人姓名"
+      },
+      idNum: {
+        required: "请填写身份证号码"
+      },
+      accountCard: {
+        required: "请填写收款卡号"
+      },
+      bankCity: {
+        required: "请选择开户行城市"
+      },
+      bankName: {
+        required: "请选择银行名称"
+      },
+      subBankName: {
+        required: "请选择支行名称"
+      }
+    }  
+  });
+
+  $("#accountType").change(function(){
+     var sel = $(this).val();
+     console.log(sel);
+     switch(sel)
+      {
+      case "":
+        $(".for-public").addClass("dis");
+        $(".for-private").addClass("dis");
+        break;
+      case "1":
+        $(".for-public").removeClass("dis");
+        $(".for-private").addClass("dis");
+        break;
+      case "2":
+        $(".for-public").addClass("dis");
+        $(".for-private").removeClass("dis");
+        break;
+      }
+  })
+
+   //点击下一步按钮
+  $(".reg #nextBtn").click(function(){
+    if ($(".reg #regFrm").valid()){ 
+        $('#infoModal').modal();
+    }
+  });
+
+  //点击确定按钮
+  $(".reg #confirmBtn").click(function(){
+        $.ajax({
+          cache: false,
+          type: "POST",
+          url: '',
+          data: $("#regFrm").serialize(),
+          async: false,
+          dataType:'json',
+          success: function(msg){
+              if(msg.status == 200){
+                window.location.href='register_success.html';  
+              }else{
+                  art.dialog('注册失败！', function(){});
+                  return false;
+              }
+          }
+        });
+  });
+}) 
+</script>
+
